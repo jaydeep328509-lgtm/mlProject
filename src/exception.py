@@ -1,5 +1,5 @@
 import sys
-from logger import logging # Assumes your previous logging code is saved in logger.py
+from src.logger import logging # Assumes your previous logging code is saved in logger.py
 
 def error_message_detail(error, error_detail: sys):
     # exc_info() returns (type, value, traceback)
@@ -23,16 +23,3 @@ class CustomException(Exception):
     def __str__(self):
         return self.error_message
     
-if __name__=="__main__":
-    try:
-        a = 1 / 0
-    except Exception as e:
-        # 1. Create the custom exception object first
-        custom_error = CustomException(e, sys)
-        
-        # 2. Log the detailed custom error message to your file
-        # We use logging.error() instead of info() since it's an actual failure
-        logging.error(custom_error) 
-        
-        # 3. Finally, crash the program and print to the console
-        raise custom_error
